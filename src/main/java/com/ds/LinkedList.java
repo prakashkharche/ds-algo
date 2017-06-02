@@ -173,4 +173,42 @@ public class LinkedList {
     public boolean isPalindrome() {
         return false;
     }
+
+    public static LinkedList addNumbers(LinkedList l1, LinkedList l2) {
+        Node n1 = l1.head;
+        Node n2 = l2.head;
+        LinkedList sumList = null;
+        int carry = 0;
+        while (n1 != null || n2 != null) {
+            int nodeNumber = 0;
+            if (n1 != null && n2 != null) {
+                int sum = n1.data + n2.data + carry;
+                nodeNumber = sum % 10;
+                carry = sum/10;
+                n1 = n1.next;
+                n2 = n2.next;
+            } else if (n1 != null) {
+                int sum = n1.data + carry;
+                nodeNumber = sum % 10;
+                carry = sum/10;
+                n1 = n1.next;
+            } else {
+                int sum = n2.data + carry;
+                nodeNumber = sum % 10;
+                carry = sum/10;
+                n2 = n2.next;
+            }
+            if (sumList == null) {
+                sumList = new LinkedList(nodeNumber);
+            } else {
+                sumList.insertAtEnd(nodeNumber);
+            }
+        }
+
+        if (carry != 0) {
+            sumList.insertAtEnd(carry);
+        }
+        return sumList;
+
+    }
 }

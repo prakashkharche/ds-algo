@@ -99,9 +99,22 @@ public class LinkedListTest {
         linkedList.printReverse();
     }
 
+    @Test
+    public void addNumbersTest() throws Exception {
+        LinkedList l1 = new LinkedList(7);
+        l1.insertAtEnd(5);
+        l1.insertAtEnd(9);
+        l1.insertAtEnd(4);
+        l1.insertAtEnd(6);
+
+        LinkedList l2 = new LinkedList(8);
+        l2.insertAtEnd(4);
+        LinkedList sumList = LinkedList.addNumbers(l1, l2);
+        sumList.print();
+    }
+
     @After
     public void tearDown() throws Exception {
-
 
     }
 }
