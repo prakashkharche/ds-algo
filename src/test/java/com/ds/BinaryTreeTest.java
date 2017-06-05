@@ -1,0 +1,58 @@
+package com.ds;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Optional;
+
+/**
+ * Created by prakash.vijay on 03/06/17.
+ */
+public class BinaryTreeTest {
+    private BinaryTree binaryTree;
+    @Before
+    public void setUp() throws Exception {
+        binaryTree = new BinaryTree(1);
+        binaryTree.insertInLeft(1, 2);
+        binaryTree.insertInRight(1, 3);
+        binaryTree.insertInLeft(2, 4);
+        binaryTree.insertInRight(2, 5);
+    }
+
+    @Test
+    public void testPreOrderTraversal() throws Exception {
+        binaryTree.preorder();
+    }
+
+    @Test
+    public void testSearch() throws Exception {
+        int data = 5;
+        Optional<BinaryTree.Node> search = binaryTree.search(data);
+        assertTrue(search.isPresent());
+
+    }
+
+    @Test
+    public void testSearchNotFound() throws Exception {
+        int data = 10;
+        Optional<BinaryTree.Node> search = binaryTree.search(data);
+        assertFalse(search.isPresent());
+
+    }
+
+    @Test
+    public void testPostorder() throws Exception {
+        binaryTree.postOrder();
+    }
+
+    @Test
+    public void testInorder() throws Exception {
+        binaryTree.inorder();
+    }
+
+    @Test
+    public void levelOrder() throws Exception {
+        binaryTree.levelOrder();
+    }
+}
