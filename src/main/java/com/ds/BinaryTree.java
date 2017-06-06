@@ -126,4 +126,22 @@ public class BinaryTree {
         }
     }
 
+    public static boolean areIdentical(BinaryTree binaryTree1, BinaryTree binaryTree2) {
+        return areIdenticalRecursive(binaryTree1.root, binaryTree2.root);
+    }
+
+    private static boolean areIdenticalRecursive(Node node1, Node node2) {
+        if (node1 == null && node2 == null) {
+            return true;
+        }
+        if (node1 == null || node2 == null) {
+            return false;
+        }
+
+        boolean identicalNode = node1.data == node2.data;
+        boolean identicalLeftSubtree = areIdenticalRecursive(node1.left, node2.left);
+        boolean identicalRightSubtree = areIdenticalRecursive(node1.right, node2.right);
+        return identicalNode && identicalLeftSubtree && identicalRightSubtree;
+    }
+
 }

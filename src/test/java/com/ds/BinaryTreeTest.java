@@ -55,4 +55,21 @@ public class BinaryTreeTest {
     public void levelOrder() throws Exception {
         binaryTree.levelOrder();
     }
+
+    @Test
+    public void testIdentical() throws Exception {
+        boolean identical = BinaryTree.areIdentical(binaryTree, binaryTree);
+        assertTrue(identical);
+    }
+
+    @Test
+    public void testNonIdentical() throws Exception {
+        BinaryTree binaryTree1 = new BinaryTree(1);
+        binaryTree1.insertInLeft(1, 10);
+        binaryTree1.insertInRight(1, 3);
+        binaryTree1.insertInLeft(2, 4);
+        binaryTree1.insertInRight(2, 5);
+        boolean identical = BinaryTree.areIdentical(binaryTree, binaryTree);
+        assertTrue(identical);
+    }
 }
