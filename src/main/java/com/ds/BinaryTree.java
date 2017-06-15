@@ -1,5 +1,7 @@
 package com.ds;
 
+import javafx.util.Pair;
+
 import java.util.*;
 import java.util.LinkedList;
 
@@ -144,4 +146,22 @@ public class BinaryTree {
         return identicalNode && identicalLeftSubtree && identicalRightSubtree;
     }
 
+    public boolean isTreeBalanced() {
+        return isTreeBalancedRecursive(root).flag;
+    }
+
+    private static IntBool isTreeBalancedRecursive(Node node) {
+        if (node == null) {
+            return new IntBool(0, true);
+        }
+        IntBool left = isTreeBalancedRecursive(node.left);
+        IntBool right = isTreeBalancedRecursive(node.right);
+        if (!left.flag || !right.flag) {
+            return new IntBool(Math.max(left.integer, right.integer) + 1, false);
+        }
+        if (Math.abs(left.integer - right.integer) > 1) {
+            return new IntBool(Math.max(left.integer, right.integer) + 1, false);
+        }
+        return new IntBool(Math.max(left.integer, right.integer) + 1, true);
+    }
 }

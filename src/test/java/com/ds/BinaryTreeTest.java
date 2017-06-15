@@ -72,4 +72,21 @@ public class BinaryTreeTest {
         boolean identical = BinaryTree.areIdentical(binaryTree, binaryTree);
         assertTrue(identical);
     }
+
+    @Test
+    public void isBalancedTree() throws Exception {
+        boolean treeBalanced = binaryTree.isTreeBalanced();
+        assertTrue(treeBalanced);
+    }
+
+    @Test
+    public void isUnbalancedTree() throws Exception {
+        BinaryTree binaryTree1 = new BinaryTree(1);
+        binaryTree1.insertInLeft(1, 10);
+        binaryTree1.insertInRight(1, 3);
+        binaryTree1.insertInLeft(3, 4);
+        binaryTree1.insertInRight(4, 5);
+        boolean treeBalanced = binaryTree1.isTreeBalanced();
+        assertFalse(treeBalanced);
+    }
 }
