@@ -89,4 +89,14 @@ public class BinaryTreeTest {
         boolean treeBalanced = binaryTree1.isTreeBalanced();
         assertFalse(treeBalanced);
     }
+
+    @Test
+    public void printAllpaths() throws Exception {
+        binaryTree.printAllRootToLeafPaths();
+    }
+
+    @Test
+    public void printAncestors() throws Exception {
+        binaryTree.printAncestors(4);
+    }
 }

@@ -164,4 +164,35 @@ public class BinaryTree {
         }
         return new IntBool(Math.max(left.integer, right.integer) + 1, true);
     }
+
+    public void printAllRootToLeafPaths() {
+        printAllRootToLeafPathsRec(root, "");
+    }
+
+    private void printAllRootToLeafPathsRec(Node node, String path) {
+        if (node.left == null && node.right == null) {
+            System.out.println(path + " " + node.data);
+            return;
+        }
+
+        printAllRootToLeafPathsRec(node.left, path + " " + node.data);
+        printAllRootToLeafPathsRec(node.right, path + " " + node.data);
+    }
+
+    public void printAncestors(int nodeToSearch) {
+        printAncestorsRec(root, "", nodeToSearch);
+    }
+
+    private void printAncestorsRec(Node node, String ancestors, int nodeToSearch) {
+        if (node == null) {
+            return;
+        }
+        if (node.data == nodeToSearch) {
+            System.out.println(ancestors);
+            return;
+        }
+
+        printAncestorsRec(node.left, ancestors+" "+node.data, nodeToSearch);
+        printAncestorsRec(node.right, ancestors+" "+node.data, nodeToSearch);
+    }
 }
