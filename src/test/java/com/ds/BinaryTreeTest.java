@@ -99,4 +99,12 @@ public class BinaryTreeTest {
     public void printAncestors() throws Exception {
         binaryTree.printAncestors(4);
     }
+
+    @Test
+    public void testSubtree() throws Exception {
+        BinaryTree binaryTree1 = new BinaryTree(2);
+        binaryTree1.insertInLeft(2, 4);
+        binaryTree1.insertInRight(2, 5);
+        assertTrue(binaryTree.hasSubtree(binaryTree1));
+    }
 }

@@ -195,4 +195,28 @@ public class BinaryTree {
         printAncestorsRec(node.left, ancestors+" "+node.data, nodeToSearch);
         printAncestorsRec(node.right, ancestors+" "+node.data, nodeToSearch);
     }
+
+    public boolean hasSubtree(BinaryTree binaryTree) {
+        return hasSubtreeRec(root, binaryTree.root);
+    }
+
+    private boolean hasSubtreeRec(Node node1, Node node2) {
+        if (node1 == null) {
+            return false;
+        }
+        if (node1.data == node2.data) {
+            return isIdentical(node1, node2);
+        }
+        return hasSubtreeRec(node1.left, node2) || hasSubtreeRec(node1.right, node2) ;
+    }
+
+    private boolean isIdentical(Node node1, Node node2) {
+        if (node2 == null) {
+            return true;
+        }
+        if (node1 == null) {
+            return false;
+        }
+        return node1.data == node2.data && isIdentical(node1.left, node2.left) && isIdentical(node1.right, node2.right);
+    }
 }
