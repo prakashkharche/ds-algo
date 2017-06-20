@@ -107,4 +107,9 @@ public class BinaryTreeTest {
         binaryTree1.insertInRight(2, 5);
         assertTrue(binaryTree.hasSubtree(binaryTree1));
     }
+
+    @Test
+    public void testPrintSumPaths() throws Exception {
+        binaryTree.printSumPaths(7);
+    }
 }

@@ -219,4 +219,23 @@ public class BinaryTree {
         }
         return node1.data == node2.data && isIdentical(node1.left, node2.left) && isIdentical(node1.right, node2.right);
     }
+
+    public void printSumPaths(int sum) {
+        printSumPathsRec(root, sum, 0, "");
+    }
+
+    private void printSumPathsRec(Node node, int requiredSum, int sumTillNow, String path) {
+        if (node == null) {
+            return;
+        }
+        if (node.left == null && node.right == null) {
+            if (sumTillNow + node.data == requiredSum) {
+                System.out.println(path + " " +node.data);
+                return;
+            }
+            return;
+        }
+        printSumPathsRec(node.left, requiredSum, sumTillNow+node.data, path+" "+node.data);
+        printSumPathsRec(node.right, requiredSum, sumTillNow+node.data, path+" "+node.data);
+    }
 }
