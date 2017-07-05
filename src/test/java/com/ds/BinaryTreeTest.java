@@ -1,5 +1,7 @@
 package com.ds;
 
+import static com.ds.NodeType.L;
+import static com.ds.NodeType.N;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -111,5 +113,40 @@ public class BinaryTreeTest {
     @Test
     public void testPrintSumPaths() throws Exception {
         binaryTree.printSumPaths(7);
+    }
+
+    @Test
+    public void testConvertToSumTree() throws Exception {
+        BinaryTree binaryTree = new BinaryTree(10);
+        binaryTree.insertInLeft(10, -2);
+        binaryTree.insertInRight(10, 6);
+        binaryTree.insertInLeft(-2, 8);
+        binaryTree.insertInRight(-2, -4);
+        binaryTree.insertInLeft(6, 7);
+        binaryTree.insertInRight(6, 5);
+        binaryTree.convertToSumTree();
+        binaryTree.postOrder();
+    }
+
+    @Test
+    public void testPreOrderTreeConstruction() throws Exception {
+        int[] preorder = {1, 2, 4, 5, 8, 12, 13, 16, 17, 9, 3, 6, 7, 10, 11, 14, 15};
+        NodeType[] nodeTypes = {N, N, L, N, N, L, N, L, L, L, N, L, N, L, N, L, L};
+        BinaryTree binaryTree = BinaryTree.construct(preorder, nodeTypes);
+        binaryTree.preorder();
+
+    }
+
+    @Test
+    public void testConstructionFromLL() throws Exception {
+        LinkedList l1 = new LinkedList(10);
+        l1.insertAtEnd(12);
+        l1.insertAtEnd(15);
+        l1.insertAtEnd(25);
+        l1.insertAtEnd(30);
+        l1.insertAtEnd(36);
+
+        BinaryTree binaryTree = BinaryTree.construct(l1);
+        binaryTree.preorder();
     }
 }

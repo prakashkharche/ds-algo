@@ -24,6 +24,10 @@ public class BinaryTree {
         this.root = new Node(rootNodeData);
     }
 
+    public BinaryTree(Node root) {
+        this.root = root;
+    }
+
     public boolean insertInLeft(int existingNodeData, int newNodeData) {
         Optional<Node> existingNodeOptional = search(existingNodeData);
         if (!existingNodeOptional.isPresent()) {
@@ -237,5 +241,70 @@ public class BinaryTree {
         }
         printSumPathsRec(node.left, requiredSum, sumTillNow+node.data, path+" "+node.data);
         printSumPathsRec(node.right, requiredSum, sumTillNow+node.data, path+" "+node.data);
+    }
+
+    public void convertToSumTree() {
+        convertToSumTreeRec(root);
+    }
+
+    private int convertToSumTreeRec(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.left == null && node.right == null) {
+            int data = node.data;
+            node.data = 0;
+            return data;
+        }
+
+        int data = node.data;
+        node.data = convertToSumTreeRec(node.left) + convertToSumTreeRec(node.right);
+        return node.data + data;
+    }
+
+    public static BinaryTree construct(int[] preorder, NodeType[] nodeTypes) {
+        NodeInt nodeInt = contructRec(preorder, nodeTypes, 0);
+        return new BinaryTree(nodeInt.node);
+    }
+
+    private static NodeInt contructRec(int[] preorder, NodeType[] nodeTypes, int index) {
+        if (index == preorder.length) {
+            return null;
+        }
+        if (nodeTypes[index] == NodeType.L) {
+            return new NodeInt(new Node(preorder[index]), ++index);
+        }
+        Node newNode = new Node(preorder[index]);
+        NodeInt left = contructRec(preorder, nodeTypes, ++index);
+        newNode.left = left.node;
+        NodeInt right = contructRec(preorder, nodeTypes, left.index);
+        newNode.right = right.node;
+        return new NodeInt(newNode, right.index);
+    }
+
+    public static BinaryTree construct(com.ds.LinkedList linkedList) {
+        if (linkedList == null || linkedList.length() == 0) {
+            return null;
+        }
+        com.ds.LinkedList.Node lnode = linkedList.head;
+        BinaryTree binaryTree = new BinaryTree(linkedList.head.data);
+        int index = 0;
+        while (lnode != null) {
+            com.ds.LinkedList.Node mover = lnode;
+            int moves = index + 2;
+            while (mover != null) {
+                if (moves == 1) {
+                    binaryTree.insertInLeft(lnode.data, mover.data);
+                }
+                if (moves == 0) {
+                    binaryTree.insertInRight(lnode.data, mover.data);
+                }
+                mover = mover.next;
+                moves--;
+            }
+            lnode = lnode.next;
+            index++;
+        }
+        return binaryTree;
     }
 }
