@@ -43,7 +43,7 @@ public class LinkedList {
         }
 
         if (node == null) {
-            System.out.println("Data "+insertAfterData+"  not found in linked list");
+            System.out.println("Data " + insertAfterData + "  not found in linked list");
             return;
         }
         Node temp = node.next;
@@ -70,7 +70,7 @@ public class LinkedList {
         }
 
         if (current == null) {
-            System.out.println("Data "+dataToDelete+"  not found in linked list");
+            System.out.println("Data " + dataToDelete + "  not found in linked list");
             return;
         }
 
@@ -184,18 +184,18 @@ public class LinkedList {
             if (n1 != null && n2 != null) {
                 int sum = n1.data + n2.data + carry;
                 nodeNumber = sum % 10;
-                carry = sum/10;
+                carry = sum / 10;
                 n1 = n1.next;
                 n2 = n2.next;
             } else if (n1 != null) {
                 int sum = n1.data + carry;
                 nodeNumber = sum % 10;
-                carry = sum/10;
+                carry = sum / 10;
                 n1 = n1.next;
             } else {
                 int sum = n2.data + carry;
                 nodeNumber = sum % 10;
-                carry = sum/10;
+                carry = sum / 10;
                 n2 = n2.next;
             }
             if (sumList == null) {
@@ -210,5 +210,29 @@ public class LinkedList {
         }
         return sumList;
 
+    }
+
+    public void reverseKNodes(int k) {
+        this.head = reverseKNodesRecur(head, k);
+    }
+
+    public Node reverseKNodesRecur(Node node, int k) {
+        Node prev = null;
+        Node current = node;
+        Node next = node.next;
+        int count = 0;
+        while (count < k && next != null) {
+            current.next = prev;
+            prev = current;
+            current = next;
+            next = next.next;
+            count++;
+        }
+        if (next == null) {
+            current.next = prev;
+            return current;
+        }
+        node.next = reverseKNodesRecur(current, k);
+        return prev;
     }
 }

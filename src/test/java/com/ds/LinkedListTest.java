@@ -113,6 +113,22 @@ public class LinkedListTest {
         sumList.print();
     }
 
+
+    @Test
+    public void testReverseKElements() throws Exception {
+        LinkedList l1 = new LinkedList(1);
+        l1.insertAtEnd(2);
+        l1.insertAtEnd(3);
+        l1.insertAtEnd(4);
+        l1.insertAtEnd(5);
+        l1.insertAtEnd(6);
+        l1.insertAtEnd(7);
+        l1.insertAtEnd(8);
+        l1.reverseKNodes(3);
+        l1.print();
+
+    }
+
     @After
     public void tearDown() throws Exception {
 
