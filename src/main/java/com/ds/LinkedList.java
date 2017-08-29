@@ -6,7 +6,7 @@ package com.ds;
 public class LinkedList {
     public Node head;
 
-    static class Node {
+    public static class Node {
         public int data;
         public Node next;
 

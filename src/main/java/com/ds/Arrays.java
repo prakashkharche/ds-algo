@@ -22,4 +22,6 @@ public class Arrays {
         array[i1] = array[i2];
         array[i2] = temp;
     }
+
+
 }
